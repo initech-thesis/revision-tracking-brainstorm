@@ -1,0 +1,26 @@
+<button onclick="document.execCommand('bold', null, false);"><strong>B</strong></button>
+<button onclick="document.execCommand('italic', null, false);"><em><strong>I</strong></em></button>
+<button onclick="document.execCommand('underline', null, false);"><u><strong>U</strong></u></button>
+
+<div id="editor" contentEditable="true" spellcheck="false" style="border:2px solid black;height:500px">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</div>
+
+<button id="save">Save</button>
+
+<script src="jquery.js"></script>
+<script src="diff-match-patch/diff_match_patch.js"></script>
+<script>
+
+var original = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+var $editor = $('#editor');
+var dmp = new diff_match_patch();
+
+$('#save').on('click', function(event) {
+  var doc = $editor.html();
+  var patches = dmp.patch_make(original, doc);
+  console.log(patches);
+});
+
+</script>
